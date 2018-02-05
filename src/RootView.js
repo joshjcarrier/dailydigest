@@ -35,6 +35,7 @@ class RootView extends React.Component {
       poopSize: new Animated.Value(this.POOP_INITIAL_FONT_SIZE),
       poopCompleteVisible: false,
       users: null,
+      selectedTab: 'home',
     };
   }
 
@@ -44,7 +45,6 @@ class RootView extends React.Component {
         users: nextProps.allUsersQuery.allUsers,
       });
     }
->>>>>>> Add Apollo to load data from server
   }
 
   _onPoopIn = function () {
@@ -68,6 +68,14 @@ class RootView extends React.Component {
 
   _onPoopSummaryClose = function () {
     this.setState({ poopCompleteVisible: false });
+  }
+
+  _isTabSelected = function(tab) {
+    return this.state.selectedTab === tab;
+  }
+
+  _onPressTab = function(tab) {
+    this.setState({selectedTab: tab});
   }
 
   render() {
@@ -122,10 +130,10 @@ class RootView extends React.Component {
         </View>
         <View style={{ flex: 1}}>
           <TabBarIOS>
-            <TabBarIOS.Item title='Home' systemIcon='featured' />
-            <TabBarIOS.Item title='Me' systemIcon='contacts' />
-            <TabBarIOS.Item title='Groups' systemIcon='favorites' badge={1} />
-            <TabBarIOS.Item title='Settings' systemIcon='more' />
+            <TabBarIOS.Item title='Home' systemIcon='featured' selected={this._isTabSelected('home')} onPress={() => {this._onPressTab('home');}}><View></View></TabBarIOS.Item>
+            <TabBarIOS.Item title='Me' systemIcon='contacts' selected={this._isTabSelected('me')} onPress={() => {this._onPressTab('me');}}><View></View></TabBarIOS.Item>
+            <TabBarIOS.Item title='Groups' systemIcon='favorites' badge={1} selected={this._isTabSelected('groups')} onPress={() => {this._onPressTab('groups');}}><View></View></TabBarIOS.Item>
+            <TabBarIOS.Item title='Settings' systemIcon='more' selected={this._isTabSelected('settings')} onPress={() => {this._onPressTab('settings');}}><View></View></TabBarIOS.Item>
           </TabBarIOS>
         </View>
       </View>
