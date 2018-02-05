@@ -16,6 +16,7 @@ import { LineChart } from 'react-native-svg-charts';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import LoginView from './LoginView';
+import PoopButton from './PoopButton';
 
 const allUsersQuery = gql`
   query {
@@ -28,13 +29,10 @@ const allUsersQuery = gql`
 `
 
 class RootView extends React.Component {
-  POOP_INITIAL_FONT_SIZE = 64;
-  POOP_MAXIMUM_FONT_SIZE = this.POOP_INITIAL_FONT_SIZE + 100;
 
   constructor(props) {
     super(props);
     this.state = {
-      poopSize: new Animated.Value(this.POOP_INITIAL_FONT_SIZE),
       poopCompleteVisible: false,
       users: null,
       selectedTab: 'home',
@@ -49,23 +47,8 @@ class RootView extends React.Component {
     }
   }
 
-  _onPoopIn = function () {
-    Animated.timing(this.state.poopSize, {
-      toValue: this.POOP_MAXIMUM_FONT_SIZE,
-      duration: 2000,
-    }).start();
-  }
-
-  _onPoopOut = function () {
-    let sizeOfPoop = (this.state.poopSize._value/this.POOP_MAXIMUM_FONT_SIZE)*100;
+  _onPoopPressed = () => {
     this.setState({ poopCompleteVisible: true });
-    Animated.sequence([
-      Animated.delay(300),
-      Animated.timing(this.state.poopSize, {
-        toValue: this.POOP_INITIAL_FONT_SIZE,
-        duration: 20,
-      })
-    ]).start();
   }
 
   _onPoopSummaryClose = function () {
@@ -97,7 +80,7 @@ class RootView extends React.Component {
                         onPress={() => this._onPoopSummaryClose()}
                         title="Close modal">
                     </Button>
-                    <Text style={{ fontSize: 54 }}>{(this.state.poopSize._value / this.POOP_MAXIMUM_FONT_SIZE)*100}%</Text>              
+                    <Text style={{ fontSize: 54 }}>Herro</Text>              
                   </View>
                 </View>
               </Modal>
@@ -129,9 +112,7 @@ class RootView extends React.Component {
                   }} />
               </View>
               <View style={{ flex: 2, padding: 16, alignContent: 'center', justifyContent: 'center' }}>
-                  <TouchableOpacity style={{ alignItems: 'center' }} hitSlop={{ left: 8, top: 8, right: 8, bottom: 8 }} onPressIn={() => this._onPoopIn()} onPressOut={() => this._onPoopOut()}>
-                    <Animated.Text style={{ fontSize: this.state.poopSize }}>💩</Animated.Text>
-                  </TouchableOpacity>
+                <PoopButton onPoopPressed={this._onPoopPressed} />
               </View>
             </View>
           </TabBarIOS.Item>
