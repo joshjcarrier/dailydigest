@@ -58,7 +58,7 @@ export default class HomeView extends React.Component {
         <View style={{ flex: 4, backgroundColor: 'red' }}>
           <Map />
         </View>
-        <View style={{ flex: 8 }}>
+        <View style={{ flex: 6 }}>
           <Text>{ JSON.stringify(this.props.users) }</Text>
           <FlatList
             data={[
@@ -77,7 +77,7 @@ export default class HomeView extends React.Component {
               );
             }} />
         </View>
-        <View style={{ flex: 2, padding: 16, alignContent: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 4, padding: 16, alignContent: 'center', justifyContent: 'center' }}>
           <PoopButton
             onPoopPressed={this._onPoopPressed}
             userID={this.state.userId}
