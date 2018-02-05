@@ -1,13 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app! HERE WE GO.</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+      <View style={{ flex: 1}}>
+        <View style={{ flex: 4, backgroundColor: 'red' }}>
+          <Text>Background map thing</Text>
+        </View>
+        <View style={{ flex: 8, backgroundColor: 'blue' }}>
+          <Text>Live tracking goes here</Text>
+        </View>
+        <View style={{ flex: 1, backgroundColor: 'orange' }}>
+            <Button title='💩' onPress={() => null} />
+        </View>
+        <View style={{ flex: 1}}>
+          <Text>Navigation goes here</Text>
+        </View>
       </View>
     );
   }
