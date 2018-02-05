@@ -36,7 +36,7 @@ class RootView extends React.Component {
       poopSize: new Animated.Value(this.POOP_INITIAL_FONT_SIZE),
       poopCompleteVisible: false,
       users: null,
-      selectedTab: 'home',
+      selectedTab: 'settings',
     };
   }
 
