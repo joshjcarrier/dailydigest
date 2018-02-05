@@ -35,7 +35,7 @@ class RootView extends React.Component {
     this.state = {
       poopCompleteVisible: false,
       users: null,
-      selectedTab: 'settings',
+      selectedTab: 'home',
     };
   }
 
