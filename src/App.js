@@ -4,6 +4,7 @@ import {
   Animated,
   Button,   
   FlatList,
+  Modal,
   StyleSheet, 
   TabBarIOS,  
   Text, 
@@ -19,7 +20,7 @@ export default class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { poopSize: new Animated.Value(this.POOP_INITIAL_FONT_SIZE) };
+    this.state = { poopSize: new Animated.Value(this.POOP_INITIAL_FONT_SIZE), poopCompleteVisible: false };
   }
 
   _onPoopIn = function () {
@@ -31,8 +32,7 @@ export default class App extends React.Component {
 
   _onPoopOut = function () {
     let sizeOfPoop = (this.state.poopSize._value/this.POOP_MAXIMUM_FONT_SIZE)*100;
-    debugger
-    Alert.alert("Poop completed", `${sizeOfPoop}% of maximum size`)
+    this.setState({ poopCompleteVisible: true });
     Animated.sequence([
       Animated.delay(300),
       Animated.timing(this.state.poopSize, {
@@ -42,9 +42,28 @@ export default class App extends React.Component {
     ]).start();
   }
 
+  _onPoopSummaryClose = function () {
+    this.setState({ poopCompleteVisible: false });
+  }
+
   render() {
     return (
       <View style={{ flex: 1}}>
+        <Modal
+          transparent={true}
+          visible={this.state.poopCompleteVisible}
+          animationType={'fade'}
+          onRequestClose={() => this._onPoopSummaryClose()} >
+          <View style={{ flex: 1, margin: 32, backgroundColor: 'white' }}>
+            <View style={{ padding: 16 }}>
+              <Button
+                  onPress={() => this._onPoopSummaryClose()}
+                  title="Close modal">
+              </Button>
+              <Text style={{ fontSize: 54 }}>{(this.state.poopSize._value / this.POOP_MAXIMUM_FONT_SIZE)*100}%</Text>              
+            </View>
+          </View>
+        </Modal>
         <View style={{ flex: 4, backgroundColor: 'red' }}>
           <MapView initialRegion={{
             latitude: 47.620440,
