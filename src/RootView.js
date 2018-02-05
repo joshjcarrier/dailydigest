@@ -67,7 +67,7 @@ class RootView extends React.Component {
               users={this.state.users}
               userId={this.state.userId}/>
           </TabBarIOS.Item>
-          <TabBarIOS.Item title='Me' systemIcon='contacts' selected={this._isTabSelected('me')} onPress={() => { this._onPressTab('me'); }}>
+          <TabBarIOS.Item title='Me' systemIcon='history' selected={this._isTabSelected('me')} onPress={() => { this._onPressTab('me'); }}>
             <ListOfBadgesView />
           </TabBarIOS.Item>
           <TabBarIOS.Item title='Groups' systemIcon='favorites' badge={1} selected={this._isTabSelected('groups')} onPress={() => { this._onPressTab('groups'); }}>

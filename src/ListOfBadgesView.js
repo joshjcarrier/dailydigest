@@ -20,9 +20,9 @@ class ListOfBadgesView extends React.Component {
             key: "Frequent movements"
           },
         ].map((badge) => { return (
-          <View style={{ borderColor: 'lightgrey', borderWidth: 1, width: '47%', height: 200 }}>
-            <View style={{ flex: 1, backgroundColor: 'red', borderRadius: 100 }}>
-              <Text>{badge.key}</Text>
+          <View key={badge.key} style={{ borderColor: 'lightgrey', borderWidth: 1, width: '47%', height: 200 }}>
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'red', borderRadius: 100 }}>
+              <Text style={{ textAlign: 'center' }}>{badge.key}</Text>
             </View>
           </View>
         );})}
