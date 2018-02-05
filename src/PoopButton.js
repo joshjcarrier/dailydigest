@@ -18,11 +18,10 @@ import gql from 'graphql-tag';
 import LoginView from './LoginView';
 
 const addPoopMutation = gql`
-  query {
-    allUsers {
+  mutation createPoop($userID: ID!) {
+    createPoop(userId: $userID) {
       id
-      firstname
-      username
+      createdAt
     }
   }
 `
@@ -44,7 +43,6 @@ class PoopButton extends React.Component {
 
   _onPoopOut = () => {
     let sizeOfPoop = (this.state.poopSize._value/this.POOP_MAXIMUM_FONT_SIZE)*100;
-    this.props.onPoopPressed();
     Animated.sequence([
       Animated.delay(300),
       Animated.timing(this.state.poopSize, {
@@ -52,6 +50,27 @@ class PoopButton extends React.Component {
         duration: 20,
       })
     ]).start();
+
+    this._addPoop();
+  }
+
+  _addPoop() {
+    this.props.mutate({
+      variables: {
+        userID: this.props.userID,
+      }
+    }).then(({ data }) => {
+      this.props.onPoopPressed(data);
+    }).catch(error => {
+      Alert.alert(
+        'Crap',
+        'Could not log poop',
+        [
+          { text: 'Welp' },
+        ],
+        { cancelable: false }
+      );
+    });
   }
 
   render() {
@@ -75,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PoopButton;
+export default graphql(addPoopMutation)(PoopButton);
