@@ -11,6 +11,7 @@ import {
   View, 
 } from 'react-native';
 import MapView from 'react-native-maps';
+import { LineChart } from 'react-native-svg-charts'
 
 export default class App extends React.Component {
   POOP_INITIAL_FONT_SIZE = 64;
@@ -55,9 +56,9 @@ export default class App extends React.Component {
         <View style={{ flex: 8 }}>
           <FlatList
             data={[
-              {key: 'Facebook'},
-              {key: 'Google'},
-              {key: 'UBC'},
+              {key: 'Facebook', stats: [1, 2, 3, 4, 5]},
+              {key: 'Google', stats: [5, 3, 1, 3, 5]},
+              {key: 'UBC', stats: [5, 4, 3, 2, 1]},
             ]}
             renderItem={({item}) => {
               return (
@@ -65,6 +66,7 @@ export default class App extends React.Component {
                   <Text style={{ textAlign: 'center', padding: 32 }}>
                     {item.key}
                   </Text>
+                  <LineChart dataPoints={ item.stats } style={{ height: 50 }} svg={{ stroke: '#795548' }} showGrid={ false }/>
                 </View>
               );
              }} />
