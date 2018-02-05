@@ -1,0 +1,17 @@
+type User @model {
+  id: ID! @isUnique
+  username: String! @isUnique
+  firstname: String!
+
+  groups: [Group!]! @relation(name: "GroupsOnUser")
+}
+
+type Group @model {
+  id: ID! @isUnique
+  groupName: String!
+  createdAt: DateTime!
+  users: [User!]! @relation(name: "GroupsOnUser")
+  poopsInLast24Hours: Int!
+  poopsInLast7Days: Int!
+  poopsInLast30Days: Int!
+}
