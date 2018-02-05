@@ -112,7 +112,10 @@ class RootView extends React.Component {
                   }} />
               </View>
               <View style={{ flex: 2, padding: 16, alignContent: 'center', justifyContent: 'center' }}>
-                <PoopButton onPoopPressed={this._onPoopPressed} />
+                <PoopButton
+                  onPoopPressed={this._onPoopPressed}
+                  userID={null /* TODO JOSHJCARRIER LOOKIE HERE */}
+                />
               </View>
             </View>
           </TabBarIOS.Item>
