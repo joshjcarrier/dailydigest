@@ -19,21 +19,51 @@ const DataStore = {
   groups: [{
     groupID: 1,
     name: 'Seattle',
+    stats: {
+      poopsInLast24Hours: 10,
+      poopsInLast7Days: 73,
+      poopsInLast30Days; 298,
+    },
   }, {
     groupID: 2,
     name: 'Non-Seattle',
+    stats: {
+      poopsInLast24Hours: 8,
+      poopsInLast7Days: 78,
+      poopsInLast30Days; 150,
+    },
   }, {
     groupID: 3,
     name: 'Microsoft',
+    stats: {
+      poopsInLast24Hours: 2,
+      poopsInLast7Days: 30,
+      poopsInLast30Days; 199,
+    },
   }, {
     groupID: 4,
     name: 'Silicon Valley Companies',
+    stats: {
+      poopsInLast24Hours: 109,
+      poopsInLast7Days: 190,
+      poopsInLast30Days; 348,
+    },
   }, {
     groupID: 5,
     name: 'Macbook Pro Owners',
+    stats: {
+      poopsInLast24Hours: 39,
+      poopsInLast7Days: 158,
+      poopsInLast30Days; 420,
+    },
   }, {
     groupID: 6,
     name: 'Macbook Air Owners',
+    stats: {
+      poopsInLast24Hours: 3,
+      poopsInLast7Days: 83,
+      poopsInLast30Days; 104,
+    },
   }],
 
   groupCompetitions: [{
