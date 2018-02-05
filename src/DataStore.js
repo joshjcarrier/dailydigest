@@ -15,12 +15,24 @@ const DataStore = {
   poops: [{
     userID: 1,
     timestamp: 1517623604,
+    location: {
+      lat: 47.620440,
+      long: -122.347173,
+    },
   }, {
     userID: 2,
     timestamp: 1517603604,
+    location: {
+      lat: 47.614412,
+      long: -122.337884,
+    },
   }, {
     userID: 3,
     timestamp: 1517611000,
+    location: {
+      lat: 47.610672,
+      long: -122.338347,
+    },
   }],
 };
 
