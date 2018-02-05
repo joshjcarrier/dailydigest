@@ -62,6 +62,7 @@ class PoopButton extends React.Component {
     }).then(({ data }) => {
       this.props.onPoopPressed(data);
     }).catch(error => {
+      console.log(error);
       Alert.alert(
         'Crap',
         'Could not log poop',
