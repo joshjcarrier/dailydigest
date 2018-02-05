@@ -15,34 +15,11 @@ import { LineChart } from 'react-native-svg-charts';
 import PoopButton from './PoopButton';
 
 export default class HomeView extends React.Component {
-  POOP_INITIAL_FONT_SIZE = 64;
-  POOP_MAXIMUM_FONT_SIZE = this.POOP_INITIAL_FONT_SIZE + 100;
-
   constructor(props) {
     super(props);
     this.state = {
-      poopSize: new Animated.Value(this.POOP_INITIAL_FONT_SIZE),
       poopCompleteVisible: false,
     };
-  }
-
-  _onPoopIn = function () {
-    Animated.timing(this.state.poopSize, {
-      toValue: this.POOP_MAXIMUM_FONT_SIZE,
-      duration: 2000,
-    }).start();
-  }
-
-  _onPoopOut = function () {
-    let sizeOfPoop = (this.state.poopSize._value / this.POOP_MAXIMUM_FONT_SIZE) * 100;
-    this.setState({ poopCompleteVisible: true });
-    Animated.sequence([
-      Animated.delay(300),
-      Animated.timing(this.state.poopSize, {
-        toValue: this.POOP_INITIAL_FONT_SIZE,
-        duration: 20,
-      })
-    ]).start();
   }
 
   _onPoopSummaryClose = function () {
