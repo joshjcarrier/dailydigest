@@ -1,8 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { 
+  Alert,
+  Button,   
+  FlatList,
+  StyleSheet, 
+  TabBarIOS,  
+  Text, 
+  TouchableOpacity,
+  View, 
+} from 'react-native';
 import MapView from 'react-native-maps';
 
 export default class App extends React.Component {
+  _doTheThing = function () {
+    Alert.alert("FOO", "totall works");
+  }
+
   render() {
     return (
       <View style={{ flex: 1}}>
@@ -14,14 +27,35 @@ export default class App extends React.Component {
             longitudeDelta: 0.001
           }} style={{ flex: 1}}/>
         </View>
-        <View style={{ flex: 8, backgroundColor: 'blue' }}>
-          <Text>Live tracking goes here</Text>
+        <View style={{ flex: 8 }}>
+          <FlatList
+            data={[
+              {key: 'Facebook'},
+              {key: 'Google'},
+              {key: 'UBC'},
+            ]}
+            renderItem={({item}) => {
+              return (
+                <View style={{ borderBottomWidth: 1, borderBottomColor: 'lightgrey' }}>
+                  <Text style={{ textAlign: 'center', padding: 32 }}>
+                    {item.key}
+                  </Text>
+                </View>
+              );
+             }} />
         </View>
-        <View style={{ flex: 1, backgroundColor: 'orange' }}>
-            <Button title='💩' onPress={() => null} />
+        <View style={{ flex: 1, padding: 16 }}>
+            <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => this._doTheThing()}>
+              <Text style={{ fontSize: 32 }}>💩</Text>
+            </TouchableOpacity>
         </View>
         <View style={{ flex: 1}}>
-          <Text>Navigation goes here</Text>
+          <TabBarIOS>
+            <TabBarIOS.Item title='Home' systemIcon='featured' />
+            <TabBarIOS.Item title='Me' systemIcon='contacts' />
+            <TabBarIOS.Item title='Groups' systemIcon='favorites' badge={1} />
+            <TabBarIOS.Item title='Settings' systemIcon='more' />
+          </TabBarIOS>
         </View>
       </View>
     );
