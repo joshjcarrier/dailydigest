@@ -19,9 +19,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "apollo-client-preset": "^1.0.8",
     "expo": "^25.0.0",
     "graphcool": "^0.11.5",
+    "graphql-tag": "^2.6.1",
     "react": "16.2.0",
+    "react-apollo": "^2.0.4",
     "react-native": "0.52.0",
     "react-native-maps": "^0.19.0",
     "react-native-svg-charts": "^2.2.2"

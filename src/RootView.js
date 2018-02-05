@@ -13,14 +13,38 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 import { LineChart } from 'react-native-svg-charts'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
-export default class RootView extends React.Component {
+const allUsersQuery = gql`
+  query {
+    allUsers {
+      id
+      firstname
+    }
+  }
+`
+
+class RootView extends React.Component {
   POOP_INITIAL_FONT_SIZE = 64;
   POOP_MAXIMUM_FONT_SIZE = this.POOP_INITIAL_FONT_SIZE + 100;
 
   constructor(props) {
     super(props);
-    this.state = { poopSize: new Animated.Value(this.POOP_INITIAL_FONT_SIZE), poopCompleteVisible: false };
+    this.state = {
+      poopSize: new Animated.Value(this.POOP_INITIAL_FONT_SIZE),
+      poopCompleteVisible: false,
+      users: null,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.allUsersQuery.loading && !nextProps.allUsersQuery.error) {
+      this.setState({
+        users: nextProps.allUsersQuery.allUsers,
+      });
+    }
+>>>>>>> Add Apollo to load data from server
   }
 
   _onPoopIn = function () {
@@ -75,6 +99,7 @@ export default class RootView extends React.Component {
         <View style={{ flex: 8 }}>
           <FlatList
             data={[
+              {key: JSON.stringify(this.state.users), stats: [1, 2, 3, 4, 5]},
               {key: 'Facebook', stats: [1, 2, 3, 4, 5]},
               {key: 'Google', stats: [5, 3, 1, 3, 5]},
               {key: 'UBC', stats: [5, 4, 3, 2, 1]},
@@ -116,3 +141,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default graphql(allUsersQuery, {name: 'allUsersQuery'})(RootView)
