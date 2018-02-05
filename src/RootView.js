@@ -8,6 +8,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import HomeView from './HomeView';
 import LoginView from './LoginView';
+import ListOfPoopsView from './ListOfPoopsView';
 
 const allUsersQuery = gql`
   query {
@@ -53,7 +54,9 @@ class RootView extends React.Component {
             <HomeView users={this.state.users}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item title='Me' systemIcon='contacts' selected={this._isTabSelected('me')} onPress={() => { this._onPressTab('me'); }}><View></View></TabBarIOS.Item>
-          <TabBarIOS.Item title='Groups' systemIcon='favorites' badge={1} selected={this._isTabSelected('groups')} onPress={() => { this._onPressTab('groups'); }}><View></View></TabBarIOS.Item>
+          <TabBarIOS.Item title='Groups' systemIcon='favorites' badge={1} selected={this._isTabSelected('groups')} onPress={() => { this._onPressTab('groups'); }}>
+            <ListOfPoopsView />
+          </TabBarIOS.Item>
           <TabBarIOS.Item title='Settings' systemIcon='more' selected={this._isTabSelected('settings')} onPress={() => { this._onPressTab('settings'); }}><LoginView /></TabBarIOS.Item>
         </TabBarIOS>
       </View>
