@@ -3,6 +3,7 @@ import {
   StyleSheet,
   TabBarIOS,
   View,
+  ScrollView,
   Text,
 } from 'react-native';
 import { graphql } from 'react-apollo';
@@ -25,11 +26,11 @@ const allPoopsQuery = gql`
 class ListOfPoopsView extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
         <Text>
           {JSON.stringify(this.props.allPoopsQuery.allPoops, null, '  ')}
         </Text>
-      </View>
+      </ScrollView>
     );
   }
 }
