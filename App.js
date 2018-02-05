@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
   Alert,
+  Animated,
   Button,   
   FlatList,
   StyleSheet, 
@@ -12,8 +13,32 @@ import {
 import MapView from 'react-native-maps';
 
 export default class App extends React.Component {
-  _doTheThing = function () {
-    Alert.alert("FOO", "totall works");
+  POOP_INITIAL_FONT_SIZE = 64;
+  POOP_MAXIMUM_FONT_SIZE = this.POOP_INITIAL_FONT_SIZE + 100;
+
+  constructor(props) {
+    super(props);
+    this.state = { poopSize: new Animated.Value(this.POOP_INITIAL_FONT_SIZE) };
+  }
+
+  _onPoopIn = function () {
+    Animated.timing(this.state.poopSize, {
+      toValue: this.POOP_MAXIMUM_FONT_SIZE,
+      duration: 2000,
+    }).start();
+  }
+
+  _onPoopOut = function () {
+    let sizeOfPoop = (this.state.poopSize._value/this.POOP_MAXIMUM_FONT_SIZE)*100;
+    debugger
+    Alert.alert("Poop completed", `${sizeOfPoop}% of maximum size`)
+    Animated.sequence([
+      Animated.delay(300),
+      Animated.timing(this.state.poopSize, {
+        toValue: this.POOP_INITIAL_FONT_SIZE,
+        duration: 20,
+      })
+    ]).start();
   }
 
   render() {
@@ -44,9 +69,9 @@ export default class App extends React.Component {
               );
              }} />
         </View>
-        <View style={{ flex: 1, padding: 16 }}>
-            <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => this._doTheThing()}>
-              <Text style={{ fontSize: 32 }}>💩</Text>
+        <View style={{ flex: 2, padding: 16, alignContent: 'center', justifyContent: 'center' }}>
+            <TouchableOpacity style={{ alignItems: 'center' }} hitSlop={{ left: 8, top: 8, right: 8, bottom: 8 }} onPressIn={() => this._onPoopIn()} onPressOut={() => this._onPoopOut()}>
+              <Animated.Text style={{ fontSize: this.state.poopSize }}>💩</Animated.Text>
             </TouchableOpacity>
         </View>
         <View style={{ flex: 1}}>
