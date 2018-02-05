@@ -22,6 +22,7 @@ const allUsersQuery = gql`
     allUsers {
       id
       firstname
+      username
     }
   }
 `
