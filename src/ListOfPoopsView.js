@@ -12,7 +12,7 @@ import LoginView from './LoginView';
 
 const allPoopsQuery = gql`
   query {
-    allPoops {
+    allPoops(orderBy: createdAt_DESC) {
       id
       createdAt
       user {
