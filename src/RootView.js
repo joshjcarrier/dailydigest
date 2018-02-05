@@ -10,6 +10,7 @@ import gql from 'graphql-tag';
 import HomeView from './HomeView';
 import LoginView from './LoginView';
 import ListOfPoopsView from './ListOfPoopsView';
+import ListOfBadgesView from './ListOfBadgesView';
 
 const allUsersQuery = gql`
   query {
@@ -66,7 +67,9 @@ class RootView extends React.Component {
               users={this.state.users}
               userId={this.state.userId}/>
           </TabBarIOS.Item>
-          <TabBarIOS.Item title='Me' systemIcon='contacts' selected={this._isTabSelected('me')} onPress={() => { this._onPressTab('me'); }}><View></View></TabBarIOS.Item>
+          <TabBarIOS.Item title='Me' systemIcon='contacts' selected={this._isTabSelected('me')} onPress={() => { this._onPressTab('me'); }}>
+            <ListOfBadgesView />
+          </TabBarIOS.Item>
           <TabBarIOS.Item title='Groups' systemIcon='favorites' badge={1} selected={this._isTabSelected('groups')} onPress={() => { this._onPressTab('groups'); }}>
             <ListOfPoopsView />
           </TabBarIOS.Item>
