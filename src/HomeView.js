@@ -63,7 +63,7 @@ export default class HomeView extends React.Component {
                 onPress={() => this._onPoopSummaryClose()}
                 title="Close modal">
               </Button>
-              <Text style={{ fontSize: 54 }}>{(this.state.poopSize._value / this.POOP_MAXIMUM_FONT_SIZE) * 100}%</Text>
+              <Text style={{ fontSize: 54 }}>Herro</Text>
             </View>
           </View>
         </Modal>
@@ -95,9 +95,10 @@ export default class HomeView extends React.Component {
             }} />
         </View>
         <View style={{ flex: 2, padding: 16, alignContent: 'center', justifyContent: 'center' }}>
-          <TouchableOpacity style={{ alignItems: 'center' }} hitSlop={{ left: 8, top: 8, right: 8, bottom: 8 }} onPressIn={() => this._onPoopIn()} onPressOut={() => this._onPoopOut()}>
-            <Animated.Text style={{ fontSize: this.state.poopSize }}>💩</Animated.Text>
-          </TouchableOpacity>
+          <PoopButton
+            onPoopPressed={this._onPoopPressed}
+            userID={null /* TODO JOSHJCARRIER LOOKIE HERE */}
+          />
         </View>
       </View>
     );
