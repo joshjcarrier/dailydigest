@@ -19,6 +19,8 @@ const allPoopsQuery = gql`
       user {
         firstname
       }
+      latitude
+      longitude
     }
   }
 `

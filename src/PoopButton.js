@@ -18,8 +18,8 @@ import gql from 'graphql-tag';
 import LoginView from './LoginView';
 
 const addPoopMutation = gql`
-  mutation createPoop($userID: ID!) {
-    createPoop(userId: $userID) {
+  mutation createPoop($userID: ID!, $latitude: Float, $longitude: Float) {
+    createPoop(userId: $userID, latitude: $latitude, longitude: $longitude) {
       id
       createdAt
     }
@@ -55,23 +55,30 @@ class PoopButton extends React.Component {
   }
 
   _addPoop() {
-    this.props.mutate({
-      variables: {
-        userID: this.props.userID,
-      }
-    }).then(({ data }) => {
-      this.props.onPoopPressed(data);
-    }).catch(error => {
-      console.log(error);
-      Alert.alert(
-        'Crap',
-        'Could not log poop',
-        [
-          { text: 'Welp' },
-        ],
-        { cancelable: false }
-      );
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.props.mutate({
+          variables: {
+            userID: this.props.userID,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,      
+          }
+        }).then(({ data }) => {
+          this.props.onPoopPressed(data);
+        }).catch(error => {
+          console.log(error);
+          Alert.alert(
+            'Crap',
+            'Could not log poop',
+            [
+              { text: 'Welp' },
+            ],
+            { cancelable: false }
+          );
+        });
+      },
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 1000 },
+    );
   }
 
   render() {
