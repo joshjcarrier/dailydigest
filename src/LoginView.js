@@ -24,7 +24,6 @@ LoginView = class LoginView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionUserId: null,
       users: [],
     };
   }
@@ -37,14 +36,9 @@ LoginView = class LoginView extends React.Component {
     }
   }
 
-  componentDidMount = async function() {
-    let sessionUserId = await AsyncStorage.getItem('@session:userId');
-    this.setState({ sessionUserId });
-  }
-
   _onLoginPress = async function(userId) {
     return await AsyncStorage.setItem('@session:userId', userId, () => {
-      this.setState({ sessionUserId: userId });      
+      this.props.onLoginComplete(userId);
     });
   }
 
@@ -70,7 +64,7 @@ LoginView = class LoginView extends React.Component {
               <Button 
                 title="log in" 
                 onPress={() => this._onLoginPress(item.id)}
-                disabled={ item.id == this.state.sessionUserId } />
+                disabled={ item.id == this.props.userId } />
           </View>
           );})}
         </ScrollView>

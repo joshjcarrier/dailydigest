@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  AsyncStorage,
   StyleSheet,
   TabBarIOS,
   View,
@@ -25,6 +26,7 @@ class RootView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: null,
       users: null,
       selectedTab: 'home',
     };
@@ -38,8 +40,17 @@ class RootView extends React.Component {
     }
   }
 
+  componentWillMount = async function() {
+    const userId = await AsyncStorage.getItem('@session:userId')
+    this.setState({ userId });
+  }
+
   _isTabSelected = function(tab) {
     return this.state.selectedTab === tab;
+  }
+
+  _onLoginComplete = function (userId) {
+    this.setState({ userId });
   }
 
   _onPressTab = function (tab) {
@@ -51,13 +62,19 @@ class RootView extends React.Component {
       <View style={{ flex: 1 }}>
         <TabBarIOS>
           <TabBarIOS.Item title='Home' systemIcon='featured' selected={this._isTabSelected('home')} onPress={() => {this._onPressTab('home');}}>
-            <HomeView users={this.state.users}/>
+            <HomeView 
+              users={this.state.users}
+              userId={this.state.userId}/>
           </TabBarIOS.Item>
           <TabBarIOS.Item title='Me' systemIcon='contacts' selected={this._isTabSelected('me')} onPress={() => { this._onPressTab('me'); }}><View></View></TabBarIOS.Item>
           <TabBarIOS.Item title='Groups' systemIcon='favorites' badge={1} selected={this._isTabSelected('groups')} onPress={() => { this._onPressTab('groups'); }}>
             <ListOfPoopsView />
           </TabBarIOS.Item>
-          <TabBarIOS.Item title='Settings' systemIcon='more' selected={this._isTabSelected('settings')} onPress={() => { this._onPressTab('settings'); }}><LoginView /></TabBarIOS.Item>
+          <TabBarIOS.Item title='Settings' systemIcon='more' selected={this._isTabSelected('settings')} onPress={() => { this._onPressTab('settings'); }}>
+            <LoginView 
+              onLoginComplete={(userId) => this._onLoginComplete(userId)}
+              userId={this.state.userId} />
+          </TabBarIOS.Item>
         </TabBarIOS>
       </View>
     );

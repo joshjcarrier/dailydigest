@@ -20,13 +20,7 @@ export default class HomeView extends React.Component {
     super(props);
     this.state = {
       poopCompleteVisible: false,
-      userId: null,
     };
-  }
-
-  componentWillMount = async function () {
-    const userId = await AsyncStorage.getItem('@session:userId')
-    this.setState({ userId });
   }
 
   _onPoopPressed = () => {		
@@ -85,7 +79,7 @@ export default class HomeView extends React.Component {
         <View style={{ flex: 2, padding: 16, alignContent: 'center', justifyContent: 'center' }}>
           <PoopButton
             onPoopPressed={this._onPoopPressed}
-            userID={this.state.userId}
+            userID={this.props.userId}
           />
         </View>
       </View>
