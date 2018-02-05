@@ -11,8 +11,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import MapView from 'react-native-maps';
 import { LineChart } from 'react-native-svg-charts';
+import Map from './Map';
 import PoopButton from './PoopButton';
 
 export default class HomeView extends React.Component {
@@ -56,12 +56,7 @@ export default class HomeView extends React.Component {
           </View>
         </Modal>
         <View style={{ flex: 4, backgroundColor: 'red' }}>
-          <MapView initialRegion={{
-            latitude: 47.620440,
-            longitude: -122.347173,
-            latitudeDelta: 0.001,
-            longitudeDelta: 0.001
-          }} style={{ flex: 1 }} />
+          <Map />
         </View>
         <View style={{ flex: 8 }}>
           <Text>{ JSON.stringify(this.props.users) }</Text>
